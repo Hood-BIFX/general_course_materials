@@ -1,0 +1,100 @@
+---
+title: "Required software"
+date: January 26, 2026
+---
+
+You will need the following installed prior to our first class. This may take some time, so don't wait until the last minute. If you run into any difficulties, let me know.
+
+These programs will be installed on the computers in HT 316 and HT 315. Those computers are available to use during class or whenever there is not another class using the room.
+
+## Positron
+
+You are likely familiar with RStudio. We will be using a different integrated development environment (IDE) called [Positron](https://positron.posit.co/download.html) in this class. It was developed by the same people as RStudio and is meant to replace RStudio at some point.
+
+## GitHub Desktop
+
+I recommend installing [GitHub Desktop](https://desktop.github.com/download/) for interfacing with GitHub. There are other good Git GUIs, but among free options, this is my favorite.
+
+## git
+
+If you are working on a Windows computer, you will likely need [Git for Windows](https://git-scm.com/install/windows) at some point during the semester. Git is installed on Mac and Linux computers by default.
+
+## Gemini CLI or GitHub Copilot CLI
+
+You'll need either the Gemini CLI or the GitHub Copilot CLI. You may find it useful to install both. The Gemini CLI has a generous free tier that will be sufficient for this class, and you qualify for a free GitHub Copilot Pro plan as a student. There is a little additional set up for GitHub Copilot, but the Pro plan will give you access to the best models from Anthropic, Google, OpenAI and some others.
+
+### nvm
+
+`nvm` is a tool for managing Node installations.
+
+#### Windows
+
+The recommended tool for Windows is [nvm-windows](https://github.com/coreybutler/nvm-windows) (download the [latest release here](https://github.com/coreybutler/nvm-windows/releases)).
+
+Scroll down on the release page and install with `nvm-setup.exe`. After installation, it should work in the powershell, but you may need to restart your terminal window before it is recognized (or Positron/RStudio if that is where you are running your terminal window).
+
+To install the latest stable version of Node and npm, run the following command in the powershell:
+
+```
+nvm install lts
+```
+
+#### Mac/Linux
+
+Install instructions for Mac and Linux computers are available on their [GitHub repository](https://github.com/nvm-sh/nvm). In short, run *one* of the following commands in your terminal window. First try:
+
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+```
+
+and if it complains that you don't have `curl` installed try:
+
+```
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+```
+
+If both commands fail, verify that `curl` or `wget` are installed and see the [troubleshooting](https://github.com/nvm-sh/nvm?tab=readme-ov-file#troubleshooting-on-macos) section of the README if it is still having issues. For example, you may need to install the [Xcode command line tools](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools/) with the following terminal command:
+
+```
+xcode-select --install 
+```
+
+When `nvm` finishes installing, run the following command in your terminal window:
+
+```
+nvm install node
+```
+
+### Gemini CLI
+
+Once you have Node.js/npm installed (must be version 20 or higher for the Gemini CLI), install the command line interface with the following command (see the [README](https://github.com/google-gemini/gemini-cli) for more details):
+
+```
+npm install -g @google/gemini-cli
+```
+
+This should install within a few minutes and will probably give you a bunch of messages. To verify that the Gemini CLI is properly installed, run `gemini` on the command line. Be patient, as it may take several minutes to start up the first time. It will also ask you to authenticate with your Google account.
+
+After authenticating, you should get a command prompt that says `> Type your message or @path/to/file`. You'll type your commands into this box. Use `/quit` to exit from the CLI.
+
+### GitHub Copilot CLI
+
+After installing Node.js/npm (must have version 22 or greater), you can install the [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli) with the following command:
+
+```
+npm install -g @github/copilot
+```
+
+There are other options for installing this as well, which I haven't tried (e.g. WinGet or Homebrew). Once the CLI is installed, start it up with:
+
+```
+copilot
+```
+
+At this point, you should be able to log into the CLI, but you have a few more options, depending on your [GitHub Copilot plan](https://docs.github.com/en/copilot/get-started/plans). As of early 2026, there are three free tier models (Claude Haiku 4.5, GPT 4.1, GPT-5 mini, and Raptor mini). You can also sign up for the [GitHub Student Developer Pack](https://education.github.com/pack), which will give you access to many more models and premium tier queries.
+
+Either way, be sure to log into your [GitHub Copilot settings](https://github.com/settings/copilot/features) and enable the models you are interested in using before trying to start up the CLI. If you get a message from the GitHub Copilot CLI that says something like "Missing required authentication information", you are trying to use a model that hasn't been enabled in your [GitHub Copilot settings](https://github.com/settings/copilot/features).
+
+You will be prompted to sign in with your GitHub username when you first start it up. As part of the login, you'll be asked to pick a model. You can also use the `/model` command to change models if you would like to switch between models.
+
+When you are finished (or to restart the CLI after updating your [GitHub Copilot settings](https://github.com/settings/copilot/features)) you can quit with `/quit`.
