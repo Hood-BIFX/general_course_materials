@@ -1,7 +1,7 @@
 ---
 title: "Intro to Git"
 date: January 5, 2026
-margin-footer: "[Slides](/standalone/topics/01a_git.html)"
+margin-footer: "[Slides](/standalone/general_course_materials/instructions/01a_git.html)"
 title-slide-attributes:
   data-background-image: /CourseInfo/general_course_materials/assets/01a_git_title.png
   data-background-size: contain
