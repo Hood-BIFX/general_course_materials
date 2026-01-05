@@ -1,6 +1,6 @@
 ---
 title: Positron
-date: January 26, 2026
+date: January 5, 2026
 ---
 
 ## Introduction

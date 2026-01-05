@@ -1,7 +1,6 @@
 ---
 title: "Intro to Git"
-date: January 26, 2026
-bibliography: ../assets/BIFX551.bib
+date: January 5, 2026
 margin-footer: "[Slides](/standalone/topics/01a_git.html)"
 title-slide-attributes:
   data-background-image: /CourseInfo/general_course_materials/assets/01a_git_title.png
