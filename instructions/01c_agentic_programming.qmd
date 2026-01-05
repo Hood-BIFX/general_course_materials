@@ -1,7 +1,7 @@
 ---
 title: Agentic Programming
 date: January 5, 2026
-margin-footer: "[Slides](/standalone/topics/01c_agentic_programming.html)"
+margin-footer: "[Slides](/standalone/general_course_materials/instructions/01c_agentic_programming.html)"
 title-slide-attributes:
   data-background-image: /CourseInfo/general_course_materials/assets/01c_agent_program.png
   data-background-size: contain
