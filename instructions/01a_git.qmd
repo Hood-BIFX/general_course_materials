@@ -1,0 +1,230 @@
+---
+title: "Intro to Git"
+date: January 26, 2026
+bibliography: ../assets/BIFX551.bib
+margin-footer: "[Slides](/standalone/topics/01a_git.html)"
+title-slide-attributes:
+  data-background-image: /CourseInfo/general_course_materials/assets/01a_git_title.png
+  data-background-size: contain
+  data-background-opacity: "0.2"
+---
+
+### Acknowledgments
+
+Some of the information here comes from Software Carpentry's course titled, [Version Control with Git](https://swcarpentry.github.io/git-novice).
+
+## Why Git?
+
+::: {.contnet-visible when-profile="book"}
+We’ll start by exploring how version control can be used to keep track of what one person did and when. Even if you aren’t collaborating with other people, automated version control is much better than this situation:
+:::
+
+!["notFinal.doc" by Jorge Cham, https://www.phdcomics.com](https://swcarpentry.github.io/git-novice/fig/phd101212s.png)
+
+## What is Git?
+
+-   Distributed version control: Every collaborator has a full copy of the project history on their local machine.
+
+-   Time travel: Revert to any previous state of your code
+
+### Commits
+
+-   A commit is a snapshot of your entire project at a specific point in time.
+
+-   Every commit is identified by a unique 40-character SHA-1 ID.
+
+-   Commit message documents *what* was changed and *why*
+
+::: {.content-visible when-profile="slides"}
+### Commits
+:::
+
+![Image courtesy of Software Carpentry](https://swcarpentry.github.io/git-novice/fig/play-changes.svg)
+
+### Branches & Merging
+
+-   Isolated environments: Branching allows you to diverge from the main line of development and work without affecting the stable codebase.
+
+::: {.content-visible when-profile="slides"}
+### Branches & Merging
+:::
+
+![Image courtesy of Software Carpentry](https://swcarpentry.github.io/git-novice/fig/versions.svg)
+
+::: {.content-visible when-profile="slides"}
+### Branches & Merging
+:::
+
+-   Merging: The process of bringing independent lines of development back together, combining new features with the main branch.
+
+-   Conflict resolution: Git manages overlapping changes, prompting for manual intervention only when files are edited in the exact same place.
+
+![Image courtesy of Software Carpentry](https://swcarpentry.github.io/git-novice/fig/merge.svg)
+
+::: {.content-visible when-profile="slides"}
+### Branches & Merging
+:::
+
+Without getting into the details of the exact edits happening in each commit, let's take a look at a simple git tree consisting of several commits over a couple of branches.
+
+::: {.content-visible when-profile="slides"}
+### Branches & Merging
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_01.png)
+
+### Branches & Merging
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_02.png)
+
+### Branches & Merging
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_03.png)
+
+### Branches & Merging
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_04.png)
+
+### Branches & Merging
+:::
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_05.png)
+
+### Distributed version control
+
+As mentioned above, every collaborator has a full copy of the project history. Let's pick up where we left off with the scenario above. Now that we have developed a workflow, we want to use it on a compute cluster.
+
+::: {.content-visible when-profile="slides"}
+### Distributed version control
+:::
+
+::: {.content-visible when-profile="book"}
+We now have two copies of our codebase, which we will manage with GitHub. Notice that we only pulled the main branch to the cluster, since we've decided that don't really need the development branch there.
+:::
+
+![Code is pushed from our laptop to GitHub and then pulled down to the compute cluster.](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_06.png)
+
+::: {.content-visible when-profile="slides"}
+### Distributed version control
+:::
+
+We've started working on a new feature on our laptop, and after running a couple of analyses, we discover and fix a bug on the cluster.
+
+![Our code is quickly diverging, but git will keep us organized.](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_07.png)
+
+::: {.content-visible when-profile="slides"}
+### Distributed version control
+:::
+
+We want to include the bug fix in our development branch, so let's move those changes over to our laptop and merge `c7` into dev.
+
+![Bug fix is, pushed to GitHub, pulled to our laptop and merged into dev.](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_08.png)
+
+::: {.content-visible when-profile="slides"}
+### Distributed version control
+:::
+
+Once we finish the new feature, we can merge it into out main branch and push/pull it onto the server.
+
+![Push updated repository to GitHub and pull changes to the cluster.](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_09.png)
+
+::: {.content-visible when-profile="slides"}
+### Distributed version control
+:::
+
+In this case, we are collaborating with ourselves, but collaboration between two or more people is also possible. Let's look at a git tree representing a collaboration between several people.
+
+::: {.content-visible when-profile="slides"}
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_10.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_11.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_12.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_13.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_14.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_15.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_16.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_17.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_18.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_19.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_20.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_21.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_22.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_23.png)
+
+### Distributed version control
+
+![](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_24.png)
+:::
+
+:::{.content-visible when-profile="book"}
+![A git tree illustrating collaboration between several individuals and locations.](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_26.png)
+:::
+
+## GitHub
+
+<!-- Move to GitHub to discuss these features -->
+
+-   Remote Hosting: The centralized home for your git repositories in the cloud
+
+-   Collaboration Tools: Integrated issue tracking, project boards, and wikis
+
+-   Code Security: Automated vulnerability scanning and secret detection for your repositories
+
+### Collaborative Review via Pull Request (PR)
+
+<!-- continue on GitHub for these features, what is a good example to show for this? -->
+
+-   PRs allow you to propose changes and invite team members to review your code
+
+-   100% visibility into code changes before they are finalized
+
+-   Inline comments and reviews ensure that all code meets project standards before merging
+
+## GitHub Desktop
+
+<!-- move to GitHub desktop to show these features, give examples for creating, cloning, etc... -->
+
+-   Creating repositories
+
+-   Cloning repositories (practice accepting today's assignment and cloning it to your computer)
+
+-   Visual syncing with GitHub

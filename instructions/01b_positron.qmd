@@ -1,0 +1,42 @@
+---
+title: Positron
+date: January 26, 2026
+---
+
+## Introduction
+
+-   [Positron](https://positron.posit.co/download.html) is a modern integrated development environment (IDE) for R and Python
+    -   Created by the same team that developed RStudio
+    -   Built on top of the popular Visual Studio Code editor
+
+## Features
+
+-   There are a number of features that we will use in class
+-   Many will be familiar if you have used RStudio
+-   Side panes are listed along the left side of the screen
+-   Editing pane is in the center
+-   Output panes (e.g. variables and plots) are on the right
+-   Console, terminal and other panes are at the bottom
+
+### Side Panes
+
+```{=html}
+<!-- add icons with 
+quarto add mcanouil/quarto-iconify
+Search icons at https://icon-sets.iconify.design/
+-->
+```
+
+-   Explorer {{< iconify bi files >}}: File navigation and management
+-   Search {{< iconify bi search >}}: Search across files in a project
+-   Source Control {{< iconify octicon git-branch-16 >}}: Git integration for version control
+-   Extensions {{< iconify fluent apps-16-regular >}}: Install and manage extensions to enhance functionality
+-   GitHub {{< iconify bi github >}}: Direct integration with GitHub repositories
+-   Chat {{< iconify lucide bot >}}: AI-powered coding assistance and support (requires model configuration - GitHub Copilot is recommended for this class)
+
+There are other panes available, including:
+
+-   Run and Debug {{< iconify lucide bug-play >}}: Execute and debug code snippets
+-   Remote Explorer {{< iconify carbon remote-connection >}}: Manage remote development environments
+-   Testing {{< iconify proicons beaker >}}: Tools for running and managing tests
+-   Posit Publisher {{< iconify bi arrow-up-circle >}}: Publish and share projects

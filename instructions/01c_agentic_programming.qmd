@@ -1,0 +1,114 @@
+---
+title: Agentic Programming
+date: January 26, 2026
+margin-footer: "[Slides](/standalone/topics/01c_agentic_programming.html)"
+title-slide-attributes:
+  data-background-image: /CourseInfo/general_course_materials/assets/01c_agent_program.png
+  data-background-size: contain
+  data-background-opacity: "0.2"
+---
+
+## Agentic Programming
+
+Agentic programming is a paradigm where a Large Language Model (LLM) is configured to act as an autonomous *agent*.
+
+-   **Passive LLMs:** You prompt, they respond (one-shot generation).
+
+-   **Agentic LLMs:** You provide a *goal*, and the agent takes a sequence of actions using external tools until the goal is achieved:
+
+    -   Read and write files
+
+    -   Run code
+
+    -   Make decisions
+
+## The Agentic Loop (P-A-O-R)
+
+-   Agentic systems operate in a continuous cycle, iteratively refining their work based on feedback from the environment.
+
+-   This loop continues until the overall goal is marked as complete.
+
+::: {.content-visible when-profile="slides"}
+## The Agentic Loop (P-A-O-R)
+:::
+
+::: {style="font-size: 60%;"}
+| Step | Action | Description |
+|------------------------|------------------------|------------------------|
+| **P**lan | Reasoning | Decomposes the high-level task into a sequence of executable steps (sub-goals). |
+| **A**ct | Tool Use | Executes the current step, often by calling an external tool (e.g., terminal, code interpreter, file editor). |
+| **O**bserve | Feedback | Receives the result of the action (e.g., a compiler error, a test failure, a file read). |
+| **R**efine | Correction | The LLM analyzes the observation, updates its internal memory, and adjusts the original plan for the next iteration. |
+:::
+
+## Use of Agentic Tools
+
+Agentic capabilities are helpful for tackling complex, real-world development tasks:
+
+1.  Multi-step problem solving
+    -   Can handle tasks that require 5, 10, or 50 sequential decisions (e.g., "Create a to-do list application").
+
+    -   Caveat: the more steps, the more likely it will lose its way
+    
+2.  Tool Integration
+    -   Interacts with the external environment (read/write files, execute code, run tests)
+
+::: {.content-visible when-profile="slides"}
+## Use of Agentic Tools
+:::
+
+3.  Iterative Refinement
+
+    -   Agents don't give up on the first failure
+
+    -   Learn from errors (like a failed test) and automatically try to debug and fix the code
+
+    -   User input is key
+
+4.  Autonomy (sort of)
+
+    -   Minimize continuous human supervision
+
+    -   Allow developers to delegate entire workflows rather than just single code snippets
+
+## Best Practices
+
+When working with agentic tools like the Gemini CLI, effective collaboration is key.
+
+### Define the goal, not the steps
+
+-   Good Prompt: "Implement a Python class `BlogPost` with methods for summarizing and retrieving citations, using the Google Search tool."
+
+-   Bad Prompt: "First, import `requests`. Then, define a class. Then, write a function that calls this API..."
+
+-   *Let the agent handle the planning.*
+
+### Inspect the reasoning chain
+
+-   Pay attention to the agent's internal monologue or *plan*. If the plan is flawed, the outcome will be, too.
+
+-   Intervene early if the agent's initial plan is headed in the wrong direction.
+
+### Use version control (git) heavily!
+
+-   Agentic tools change files quickly and across your project.
+
+-   Always commit, stage or stash your work before running an agent on a critical file or task.
+
+-   Use `git diff` immediately after an agent completes a task to see *exactly* what lines were added, removed, or modified.
+
+### Provide Specific Feedback
+
+-   If the agent makes a mistake, don't just say "Fix the code."
+
+-   Specify the failure: "The `create_user` function throws an error when the username is less than 5 characters. Please add validation."
+
+## Read more
+
+For additional reading, check out the documentation for
+
+-   [Gemini CLI](https://github.com/google-gemini/gemini-cli)
+
+-   [GitHub Copilot CLI](https://github.com/features/copilot/cli)
+
+Both models have generous free tiers.
