@@ -30,6 +30,26 @@ quarto render --profile blackboard
 ## Add office hours under Course Information
 You can [book a virtual or in person office visit](https://hood.campus.eab.com/pal/dkT4mB31MS) with me at your convenience. <update to your own personal scheduling link as needed>
 
+## Inserting website on Blackboard
+
+Often inserting a link is sufficient, but to insert a website on Blackboard (i.e. as a frame inside the document), follow these steps:
+
+* Navigate to the desired content area in your Blackboard course.
+* Click to add a new item and select "Create" then "Document".
+* When you add a new content block, select "HTML" and insert the following code (after editing the url):
+
+```
+<style>
+  .my-embed {
+    width: 100%;
+    height: 800;
+  }
+</style>
+
+<iframe src="https://bifx551-26.github.io/CourseInfo/" class="my-embed"></iframe>
+```
+
+
 ## Blackboard gradebook
 
 Use of the Blackboard gradebook is highly recommended. This gives students real-time feedback on grades and reduces the burden on the instructor when grades are due. Be sure to display grades as a percentage, as the default letter grades do not follow Hood College graduate school standard grade distributions.
