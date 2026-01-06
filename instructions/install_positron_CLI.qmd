@@ -1,11 +1,36 @@
 ---
 title: "Required software"
-date: January 26, 2026
+date: January 5, 2026
 ---
 
 You will need the following installed prior to our first class. This may take some time, so don't wait until the last minute. If you run into any difficulties, let me know.
 
-These programs will be installed on the computers in HT 316 and HT 315. Those computers are available to use during class or whenever there is not another class using the room.
+Most of these programs will be installed on the computers in HT 316 and HT 315. Those computers are available to use during class or whenever there is not another class using the room.
+
+## Quarto 
+
+You will need to install [Quarto](https://quarto.org/docs/get-started/) on your computer. Quarto is similar to R Markdown, but it works with multiple programming languages, including R and Python.
+
+You'll also want to install tinytex to make sure that PDF documents can be compiled properly. After installing Quarto, this can be done with the following terminal command:
+
+```
+quarto install tinytex
+```
+
+Additional information and instructions for installing tinytex are available [here](https://quarto.org/docs/authoring/latex.html#installing-tinytex).
+
+## R
+
+Install the latest version of [R](https://cran.r-project.org/mirrors.html) on your computer. I also recommend, the following packages (if you are unfamiliar with installation of R packages, we will cover this in class):
+
+* `tidyverse`
+* `rmarkdown`
+
+If you are running on Windows, you'll probably also want to install the latest version of [RTools](https://cran.r-project.org/bin/windows/Rtools/) to make sure that R packages that need to be compiled can be installed properly.
+
+## Python
+
+Install the latest version of [Python](https://www.python.org/downloads/) on your computer. Make sure to check the box that says "Add Python to PATH" during installation on Windows.
 
 ## Positron
 
@@ -13,7 +38,7 @@ You are likely familiar with RStudio. We will be using a different integrated de
 
 ## GitHub Desktop
 
-I recommend installing [GitHub Desktop](https://desktop.github.com/download/) for interfacing with GitHub. There are other good Git GUIs, but among free options, this is my favorite.
+I recommend installing [GitHub Desktop](https://desktop.github.com/download/) for interfacing with GitHub. There are other good Git GUIs (including a good option inside of Positron), but among free options, this is my favorite.
 
 ## git
 
