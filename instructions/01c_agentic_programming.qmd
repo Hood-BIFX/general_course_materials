@@ -112,3 +112,31 @@ For additional reading, check out the documentation for
 -   [GitHub Copilot CLI](https://github.com/features/copilot/cli)
 
 Both models have generous free tiers.
+
+## Review Questions
+
+- What are the four steps in the agentic programming loop?
+
+:::{.content-visible when-profile="slides"}
+## Review Questions
+:::
+
+- How does agentic programming differ from traditional LLM prompting?
+
+:::{.content-visible when-profile="slides"}
+## Review Questions
+:::
+
+- What are some best practices when working with agentic programming tools?
+
+:::{.content-visible when-profile="slides"}
+## Review Questions
+:::
+
+- In what scenarios might agentic programming be particularly useful?
+
+:::{.content-visible when-profile="slides"}
+## Review Questions
+:::
+
+- Why is version control especially important when using agentic programming tools?

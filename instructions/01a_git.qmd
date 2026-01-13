@@ -227,3 +227,36 @@ In this case, we are collaborating with ourselves, but collaboration between two
 -   Cloning repositories (practice accepting today's assignment and cloning it to your computer)
 
 -   Visual syncing with GitHub
+
+## Review Questions
+
+-   What is the purpose of version control?
+
+:::{.content-visible when-profile="slides"}
+## Review Questions
+:::
+
+
+:::{.content-visible when-profile="slides"}
+## Review Questions
+:::
+
+-   What is a commit in Git?
+
+:::{.content-visible when-profile="slides"}
+## Review Questions
+:::
+
+-   How do branches facilitate development in Git?
+
+:::{.content-visible when-profile="slides"}
+## Review Questions
+:::
+
+-   What is the difference between Git and GitHub?
+
+:::{.content-visible when-profile="slides"}
+## Review Questions
+:::
+
+-   What are pull requests and how do they contribute to code review?
