@@ -6,6 +6,12 @@ This submodule is included in all new BIFX course repositories that contains gen
 * Initialiation of the submodule (i.e. if the folder is empty after cloning the repository): `git submodule update --init --recursive`
 * Update the submodule when changes have been made in the source repository: `git submodule update --remote --merge`
 
+If git complains about file paths being too long, you may need to enable long paths in git with (this only seems to be an issue with Windows):
+
+```
+git config --global core.longpaths true
+```
+
 ## Rendering course websites
 
 ### render and push changes to the `origin-pages` branch with

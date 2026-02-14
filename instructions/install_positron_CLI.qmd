@@ -123,3 +123,41 @@ Either way, be sure to log into your [GitHub Copilot settings](https://github.co
 You will be prompted to sign in with your GitHub username when you first start it up. As part of the login, you'll be asked to pick a model. You can also use the `/model` command to change models if you would like to switch between models.
 
 When you are finished (or to restart the CLI after updating your [GitHub Copilot settings](https://github.com/settings/copilot/features)) you can quit with `/quit`.
+
+## Possible Windows Issues
+
+### python is installed but not found in the terminal window
+
+If you have installed python and are able to run it in the console window, but it is not found when you try to create the virtual environment, you may need to set up python for Powershell. This is especially likely if you installed python via Anaconda.
+
+1. Open Powershell as Administrator
+
+2. Run the following commmand to register python with Powershell (this assumes you have installed python with Anaconda at the default location - modify the path if needed):
+
+```powershell
+& "C:\ProgramData\anaconda3\Scripts\conda.exe" init powershell
+```
+
+3. Close the Powershell window and open a new one (you'll need to restart Positron as well)
+
+#### you have installed python with Anaconda and do not have admin rights
+
+If you installed python with Anaconda and do not have admin rights on your Windows computer, you can add an Anaconda terminal window to Positron:
+
+1. Open the command palette in Positron with `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac)
+2. Type "Preferences: Open User Settings (JSON)" and hit enter
+3. Find the `terminal.integrated.profiles.windows` section (or create one if it does not exist)
+4. Add this anaconda profile to the list (modify the path to `cmd.exe` if needed):
+
+```json
+"terminal.integrated.profiles.windows": {
+    "Anaconda Prompt": {
+        "path": "cmd.exe",
+        "args": [
+            "/K",
+            "C:\\ProgramData\\anaconda3\\Scripts\\activate.bat",
+            "C:\\ProgramData\\anaconda3"
+        ],
+        "icon": "terminal-powershell"
+    }
+}
