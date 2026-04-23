@@ -1,0 +1,234 @@
+---
+title: "Working on TACC"
+date: April 23, 2026
+---
+
+I've included some highlights here from the Stampede documentation at TACC and added some class-specific information. You can find the full documentation at <https://docs.tacc.utexas.edu/hpc/stampede3>.
+
+```{r}
+#| include: false
+```
+
+## Setting up an account
+
+-   Create an account at <https://identity.access-ci.org/new-user-direct>
+-   Be sure to indicate the US as the country where you are currently living
+-   You must use your Hood email to sign up
+-   Email your account name to Dr Johnson
+
+## Logging in
+
+Once you have been added to a project, you can log in with
+
+`$ ssh username@stampede3.tacc.utexas.edu`
+
+where "username" is your TACC username. You'll be asked for your password and then a TACC token code. This code is either associated with a multi-factor authentication manager (like 1Password or Google Authenticator), or will be texted to your phone on record.
+
+:::{.callout-warning}
+### Windows issues
+
+I had trouble connecting to TACC using the `PowerShell`. Use `git bash` or `wsl` instead.
+:::
+
+## module load
+
+-   There are many packages that you may use on TACC
+-   Most are not loaded by default
+    -   `module load` will load a module
+    -   `module list` will show loaded modules
+    -   `module avail` will show all compatible modules (based on what you have loaded)
+    -   `module spider` will show all modules installed on the system (including incompatible modules)
+
+## Moving around
+
+The following commands and locations are built in shortcuts and will take you to the appropriate location. Other than `cd`, these are not standard Linux commands, but they are helpful on TACC systems to find your work and scratch directories.
+
+| **Alias**     | **Command**   |
+|---------------|---------------|
+| `cd` or `cdh` | `cd $HOME`    |
+| `cdw`         | `cd $WORK`    |
+| `cds`         | `cd $SCRATCH` |
+
+<!--
+## Shared files
+
+We *will have* ~~have~~ a shared directory for class-wide data. Don't make extra copies of things. It *will be* ~~is~~ located at
+
+`TBD`
+-->
+
+## Quota
+
+You can check your quota at any time by running
+
+`$ /usr/local/etc/taccinfo`
+
+## Production Queues/Partitions
+
+Archetechture specifics for each of these partitions can be found at <https://docs.tacc.utexas.edu/hpc/stampede3/#system>.
+
++----------------+---------------+----------------------+------------+--------------+-------------+-------------------+
+| **Queue Name** | **Node Type** | **Max Nodes per Job\ | **Max Job\ | **Max Nodes\ | **Max Jobs\ | **Charge Rate\    |
+|                |               | (assoc'd cores)**    | Duration** | per User**   | per User**  | (per node-hour)** |
++================+===============+======================+============+==============+=============+===================+
+| h100           | H100[^1]      | 4 nodes\             | 48 hrs     | 4            | 2           | 4 SUs             |
+|                |               | (384 cores)          |            |              |             |                   |
++----------------+---------------+----------------------+------------+--------------+-------------+-------------------+
+| icx            | ICX           | 32 nodes\            | 48 hrs     | 48           | 12          | 1.5 SUs           |
+|                |               | (2560 cores)         |            |              |             |                   |
++----------------+---------------+----------------------+------------+--------------+-------------+-------------------+
+| nvdimm         | ICX           | 1 node\              | 48 hrs     | 1            | 2           | 4 SUs             |
+|                |               | (80 cores)           |            |              |             |                   |
++----------------+---------------+----------------------+------------+--------------+-------------+-------------------+
+| pvc            | PVC[^2]       | 4 nodes\             | 48 hrs     | 4            | 2           | 3 SUs             |
+|                |               | (384 cores)          |            |              |             |                   |
++----------------+---------------+----------------------+------------+--------------+-------------+-------------------+
+| skx            | SKX           | 256 nodes\           | 48 hrs     | 256          | 40          | 1 SU              |
+|                |               | (12288 cores)        |            |              |             |                   |
++----------------+---------------+----------------------+------------+--------------+-------------+-------------------+
+| skx-dev        | SKX           | 16 nodes\            | 2 hrs      | 16           | 2           | 1 SU              |
+|                |               | (768 cores)          |            |              |             |                   |
++----------------+---------------+----------------------+------------+--------------+-------------+-------------------+
+| spr            | SPR           | 32 nodes\            | 48 hrs     | 40           | 24          | 2 SUs             |
+|                |               | (3584 cores)         |            |              |             |                   |
++----------------+---------------+----------------------+------------+--------------+-------------+-------------------+
+
+[^1]: These nodes each have 4 NVIDIA H100 SXM5 GPUs
+[^2]: These nodes each have 4 Intel Data Center GPU Max 1550s ("Ponte Vecchio")
+
+## Common `sbatch` Options
+
+The following options are highly recommended or required:
+
+-   -t (time allotted to the job)
+-   -N (number of nodes)
+-   -p (partition / queue to submit to)
+
+I typically specify these inside of your slurm script, with the exception of the partition option. This may change, depending on the [system status](https://tacc.utexas.edu/portal/system-status), so I typically specify the partiion (*required*) on the commandline when I submit the job. For example, my slurm script my look like this:
+
+```{bash}
+#| eval: false
+#!/bin/bash
+
+#SBATCH   -o pylaunchertest.o%j
+#SBATCH   -e pylaunchertest.o%j
+#SBATCH   -N 1
+#SBATCH   -t 0:40:00
+
+# do something here...
+echo "This is not the most complicated job I've ever run."
+```
+
+and my submission command might be
+
+```{bash}
+#| eval: false
+$ sbatch -p skx my_job.slurm
+```
+
+### All options
+
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Option**          | **Argument**                     | **Comments**                                                                                                                                                                            |
++=====================+==================================+=========================================================================================================================================================================================+
+| `-A`                | *projectid*                      | Charge job to the specified project/allocation number. This option is only necessary for logins associated with multiple projects.                                                      |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-a`\               | =*tasklist*                      | Stampede3 supports Slurm job arrays. See the [Slurm documentation on job arrays](https://slurm.schedmd.com/job_array.html) for more information.                                        |
+| or\                 |                                  |                                                                                                                                                                                         |
+| `--array`           |                                  |                                                                                                                                                                                         |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-d=`               | afterok:*jobid*                  | Specifies a dependency: this run will start only after the specified job (jobid) successfully finishes                                                                                  |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-export=`          | N/A                              | Avoid this option on Stampede3. Using it is rarely necessary and can interfere with the way the system propagates your environment.                                                     |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `--gres`            |                                  | TACC does not support this option.                                                                                                                                                      |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `--gpus-per-task`   |                                  | TACC does not support this option.                                                                                                                                                      |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-p`                | *queue_name*                     | Submits to queue (partition) designated by queue_name                                                                                                                                   |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-J`                | *job_name*                       | Job Name                                                                                                                                                                                |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-N`                | *total_nodes*                    | Required. Define the resources you need by specifying either:\                                                                                                                          |
+|                     |                                  | (1) `-N` and `-n`; or\                                                                                                                                                                  |
+|                     |                                  | (2) `-N` and `-ntasks-per-node`.                                                                                                                                                        |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-n`                | *total_tasks*                    | This is total MPI tasks in this job. See `-N` above for a good way to use this option. When using this option in a non-MPI job, it is usually best to set it to the same value as `-N`. |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-ntasks-per-node`\ | tasks_per_node                   | This is MPI tasks per node. See `-N` above for a good way to use this option. When using this option in a non-MPI job, it is usually best to set `-ntasks-per-node` to 1.               |
+| or\                 |                                  |                                                                                                                                                                                         |
+| `-tasks-per-node`   |                                  |                                                                                                                                                                                         |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-t`                | *hh:mm:ss*                       | Required. Wall clock time for job.                                                                                                                                                      |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-mail-type=`       | `begin`, `end`, `fail`, or `all` | Specify when user notifications are to be sent (one option per line).                                                                                                                   |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-mail-user=`       | *email_address*                  | Specify the email address to use for notifications. Use with the `-mail-type=` flag above.                                                                                              |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-o`                | *output_file*                    | Direct job standard output to output_file (without `-e` option error goes to this file)                                                                                                 |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-e`                | *error_file*                     | Direct job error output to error_file                                                                                                                                                   |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| `-mem`              | N/A                              | Not available. If you attempt to use this option, the scheduler will not accept your job.                                                                                               |
++---------------------+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+## Interactive jobs
+
+The recommended option for interactive jobs is `idev`. This will launch a 30-minute job on `skx-dev`. For example:
+
+```{bash}
+#| eval: false
+idev
+```
+
+You can also launch longer interactive sessions and/or submit to other partitions. An example command is:
+
+```{bash}
+#| eval: false
+$ idev -p skx -N 2 -n 8 -m 150 # skx queue, 2 nodes, 8 total tasks, 150 minutes
+```
+
+### Using `srun`
+
+The `srun` command will also work, as it does on the Hood cluster. For example:
+
+```{bash}
+#| eval: false
+$ srun --pty -N 2 -n 8 -t 2:30:00 -p skx /bin/bash -l # same conditions as above
+```
+
+### Using `ssh`
+
+If you have a job currently running, you can ssh directly to the node it is running on. This is sometimes helpful to check on a running job. First, however, you need to determine where your job is running, because this only works if you currently own the node (i.e. if you have an active job running on the node). Your current nodes are listed in the output of `squeue`, for example:
+
+```{bash}
+#| eval: false
+$ squeue -u bjones
+ JOBID       PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+858811     skx-dev     idv46796   bjones  R       0:39      1 c448-004
+```
+
+In this case, `bjones` can ssh directly to `c448-004` as follows:
+
+```{bash}
+#| eval: false
+$ ssh c448-004
+```
+
+## Monitoring jobs
+
+`squeue` has a lot of good information, but it shows all information for all users by default. If you want to narrow it down to just your jobs, use the `-u` option. For example, user `sbjones` could check their jobs like this:
+
+```{bash}
+#| eval: false
+$ squeue -u bjones
+```
+
+The `ST` column is of particular interest, as it shows whether your job is pending (PD), running (R), or closing up (CG).
+
+A more complete output of job status and information can be accessed using the job name. Using the same jobID listed in the `squeue` output above, we could get this additional information with
+
+```{bash}
+#| eval: false
+$ scontrol show job=858811
+```

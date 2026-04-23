@@ -1,0 +1,120 @@
+---
+title: "Hood Cluster"
+date: April 23, 2026
+---
+
+## Slurm2
+
+Hood college has a slurm cluster available for student learning and projects.
+
+### Logging onto the head node
+
+* Terminal
+  * Open a terminal window and log in with `ssh <username>@144.175.88.28`, where `<username>` is your Hood username. Recent versions of Powershell or Git bash should support this on Windows.
+    * The Windows PowerShell supports `ssh`, as does `Git bash` for Windows.
+  * Enter your password and hit `return`
+
+
+:::{.callout-tip}
+## ssh Password
+
+When entering your password when logging into a remote server using `ssh`, no characters will show up as you type. It is paying attention and does capture what you type, even if you don't see any visual feedback.
+:::
+
+* Termius app
+  * The Termius app is great for connecting from mobile devices, although unless you have a keyboard, it can be annoying as the command line requires significant typing.
+  * You qualify for a free license when you sign up for the [GitHub Student Developer Pack](https://education.github.com/pack)!
+    * To sign up you'll need access to your Hood email and student ID - let me know if you don't have an ID.
+
+### Starting an interactive job
+
+The head node of a compute cluster is not meant for computing. This is the entry point to the cluster and is meant only for light weight tasks such as:
+
+* Navigating the directory tree
+* Viewing files
+* Moving files around (although this is sometimes managed using a different resource like [Globus](https://www.globus.org/))
+* Ad hoc file editing (major edits should be done elsewhere)
+
+To start an interactive job on the Hood cluster, enter the following command on the head node:
+
+```bash
+srun --pty bash
+```
+
+:::{.callout-tip}
+## Specifying which node to run on
+
+If you want to start your job on a specific node use something like the following:
+
+```bash
+srun --pty --nodelist=cn004 bash
+```
+
+The `sinfo` command will tell you what nodes are available on the system,
+
+```bash
+sinfo -N
+```
+
+and `squeue` will show you how many jobs are running on each node on the system.
+
+```bash
+squeue
+```
+:::
+
+
+### Submitting a batch job
+
+As discussed above, the head node of any compute cluster is meant for light weight tasks only. Similarly, most of the jobs we run on compute clusters will be batch jobs. These are scripts that we can submit and run without user interaction.
+
+To submit a batch job, we need to write the script we want to run. The code below will run `fasterq-sump` to pull all the reads from SRA associated with the accession number, 'SRR35288353'. We also have included the following options inside of the script:
+
+* `-e` saves the error stream to a file called `slurm_<jobid>.err`, where `<jobid>` is the slurm job id.
+* `-o` saves the output stream to a file called `slurm_<jobid>.out`, where `<jobid>` is the slurm job id.
+
+```bash
+#!/usr/bin/bash
+
+#SBATCH -e slurm_%j.err
+#SBATCH -o slurm_%j.out
+
+fasterq-dump SRR35288353
+```
+
+If we save this code to a file called `SRA.slurm` we could submit this job from the head node with:
+
+```bash
+sbatch SRA.slurm
+```
+
+There are many additional options we can use (e.g. to request extra resources for long-running or high memory jobs). For additional options and information:
+
+* Refer to [this summary](https://slurm.schedmd.com/pdfs/summary.pdf)
+* Read up on the [Slurm quick start guide](https://slurm.schedmd.com/quickstart.html)
+* Initiate a chat with your favorite LLM
+
+
+## Alternate options
+
+The cluster is built on old hardware and sometimes goes down unexpectedly. The following are good options when that happens.
+
+### Local compute
+
+Working on your local computer is a good option as long as you aren't doing anything too computationally intensive (or if you have a beefy computer to work on). The following are recommended for local compute:
+
+* I highly recommend [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) for bioinformatics work on Windows computers.
+* [Anaconda](https://anaconda.com/app/) (you'll need the Ubuntu version if using Anaconda on your WSL installation) - you can use this to install many bioinformatics apps. Before installing most of them, however, you'll also need to add a few additional repositories (see [instructions](https://bioconda.github.io/)). Some helpful applications include:
+  * Python (comes with the base install)
+  * [FastQC](https://anaconda.org/bioconda/fastqc)
+  * [Trimmomatic](https://anaconda.org/bioconda/trimmomatic)
+  * [Snakemake](https://anaconda.org/bioconda/snakemake)
+* [R](https://cran.r-project.org/) and [Positron](https://positron.posit.co/) (or [RStudio](https://posit.co/download/rstudio-desktop/))
+
+### Google cloud
+
+For light-weight compute in the cloud, the [Google Cloud Shell](https://cloud.google.com/) is a good (and free) option. For heavier workloads, there are paid options, but fees can pile up quickly.
+
+* Create a free account and/or log in
+* Select "Console" in the upper right corner
+* Click the "Activate Cloud Shell" button in the upper right corner - it is located at the top right of [the page](https://console.cloud.google.com/). It is a square with a ">_" symbol inside.
