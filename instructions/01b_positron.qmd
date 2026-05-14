@@ -5,9 +5,7 @@ date: January 5, 2026
 
 ## Introduction
 
--   [Positron](https://positron.posit.co/download.html) is a modern integrated development environment (IDE) for R and Python
-    -   Created by the same team that developed RStudio
-    -   Built on top of the popular Visual Studio Code editor
+You are likely familiar with RStudio. We will be using a different integrated development environment (IDE) called [Positron](https://positron.posit.co/download.html) in this class. It was developed by the same people as RStudio and is meant to replace RStudio at some point.
 
 ## Features
 
@@ -40,3 +38,60 @@ There are other panes available, including:
 -   Remote Explorer {{< iconify carbon remote-connection >}}: Manage remote development environments
 -   Testing {{< iconify proicons beaker >}}: Tools for running and managing tests
 -   Posit Publisher {{< iconify bi arrow-up-circle >}}: Publish and share projects
+
+## Tips and tricks
+
+One of the nice things about Positron is how much you can do with it. While it is powerful it is also complex. This section has a few tips and tricks that I have come across that make my work experience much nicer.
+
+### Creating a terminal profile
+
+I don't like having to type in long ip addresses whenever I need to log into a remote server, so I found a way to add a new profile to the Positron terminal options. The terminal profile here will open a terminal window directly to the Hood cluster - all you need to do is copy the correct block of code for your system and update the user name.
+
+Start by opening your local settings JSON file with
+
+* Windows: `ctrl-shift-P` and "Preferences: Open User Settings (JSON)"
+
+```json
+    "terminal.integrated.profiles.windows": {
+		"Hood cluster": {
+			"path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+                "/c",
+                "ssh user@144.175.88.28"
+            ],
+            "icon": "terminal-bash"
+            "overrideName": true
+		},
+	},
+```
+
+* Mac: `cmd-shift-P` and "Preferences: Open User Settings (JSON)"
+
+```json
+    "terminal.integrated.profiles.osx": {
+		"Hood cluster": {
+			"path": "/bin/zsh",
+			"args": [
+                "-c",
+                "ssh user@144.175.88.28"
+            ],
+            "icon": "terminal-bash"
+		},
+	}
+```
+
+You'll find that different remote connections will sometimes require different Positron settings to get them working properly. Here is an additional pofile I set up on my windows computer for Stampede at TACC, which doesn't work when logging in from PowerShell.
+
+```json
+        "Stampede3": {
+			"path": "C:\\Program Files\\Git\\bin\\bash.exe",
+			"args": [
+                "--login",
+                "-i",
+                "-c",
+                "ssh username@stampede3.tacc.utexas.edu"
+            ],
+            "icon": "terminal-bash",
+            "overrideName": true
+		}
+```
