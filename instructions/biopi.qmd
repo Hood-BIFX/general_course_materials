@@ -1,0 +1,54 @@
+---
+title: Biopi
+date: June 1, 2026
+---
+
+Biopi is a light-weight cluster that we will use to practice working on a high performance cluster, courtesy of Rho Analytics. The cluster is under active development right now. As a result, this page will receive significant updates in the near future.
+
+## Setting up your account and logging in
+
+To set up your account, you'll need an ssh key pair and some software on your computer. These steps will need to be completed for each computer you want to log in from, with the exception of emailing Dr Johnson your public key. You can copy your public key into `~/.ssh/authorized_keys` on Biopi yourself to grant access from new devices.
+
+### ssh key pair
+
+You can create your key pair in the terminal window with the following:
+
+```bash
+ssh-keygen -t ed25519 -C "your_email@hood.edu"
+```
+
+Save it in the default location (`~/.ssh/`) and pick a passphrase if desired. The passphrase is optional, but it will allow anyone to use the key if they have access to it.
+
+When you have your key, email your public key (i.e. `~/.ssh/id_ed25519.pub`) to Dr Johnson for account setup. You will receive an email confirming your account creation.
+
+### Cloudflare
+
+Logins are run through Cloudfare, so you'll also need to install a helper tool on your computer. Start by opening your local laptop's terminal or PowerShell and install the tool:
+
+-   Mac (via Homebrew): `brew install cloudflared`
+-   Windows (via winget): `winget install Cloudflare.cloudflared`
+-   Linux: `sudo apt install cloudflared`
+
+Once you have done this, remember to restart your terminal before trying to log in for the first time (which includes restarting the entire Positron app if you are working there).
+
+You'll also need to add/edit your ssh config file so it knows to connect through Cloudflare. You can find your ssh config file at:
+
+-   Mac/Linux Path: `~/.ssh/config`
+-   Windows Path: `C:\Users\YourUsername\.ssh\config`
+
+Open the config file with a text editor (or create it if it doesn't exist) and add this routing rule to the end of the file:
+
+```
+Host biopi.rho-analytics.com
+    ProxyCommand cloudflared access ssh --hostname %h
+```
+
+### Logging in
+
+Once your account is created and your computer is set up properly, you should be able to log in with the following command:
+
+```bash
+ssh username@biopi.rho-analytics.com
+```
+
+where "username" is your biopi user name. This will automatically open a browser window on Cloudflare, which will prompt you to confirm your identity using your Hood email. This authentication will need to be renewed after 24 hours.

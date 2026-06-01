@@ -3,7 +3,7 @@ title: "Hood Cluster"
 date: April 23, 2026
 ---
 
-## Slurm2
+## Slurm
 
 Hood college has a slurm cluster available for student learning and projects.
 
