@@ -1,6 +1,6 @@
 ---
 title: Biopi
-date: June 1, 2026
+date: June 3, 2026
 ---
 
 Biopi is a light-weight cluster that we will use to practice working on a high performance cluster, courtesy of Rho Analytics. The cluster is under active development right now. As a result, this page will receive significant updates in the near future.
@@ -13,7 +13,7 @@ To set up your account, you'll need an ssh key pair and some software on your co
 
 You can create your key pair in the terminal window with the following:
 
-```bash
+``` bash
 ssh-keygen -t ed25519 -C "your_email@hood.edu"
 ```
 
@@ -36,9 +36,9 @@ You'll also need to add/edit your ssh config file so it knows to connect through
 -   Mac/Linux Path: `~/.ssh/config`
 -   Windows Path: `C:\Users\YourUsername\.ssh\config`
 
-Open the config file with a text editor (or create it if it doesn't exist) and add this routing rule to the end of the file:
+Open or create the config file (e.g. with `nano ~/.ssh/config`) and add this routing rule to the end of the file:
 
-```
+```         
 Host biopi.rho-analytics.com
     ProxyCommand cloudflared access ssh --hostname %h
 ```
@@ -47,8 +47,45 @@ Host biopi.rho-analytics.com
 
 Once your account is created and your computer is set up properly, you should be able to log in with the following command:
 
-```bash
+``` bash
 ssh username@biopi.rho-analytics.com
 ```
 
 where "username" is your biopi user name. This will automatically open a browser window on Cloudflare, which will prompt you to confirm your identity using your Hood email. This authentication will need to be renewed after 24 hours.
+
+## Modules
+
+Biopi uses LMOD to manage different versions of some bioinformatics tools you might need. To check what has been installed, use
+
+``` bash
+module avail
+```
+
+and you can load a module and make it available for you to use with
+
+``` bash
+module load module_name
+```
+
+For eaxample, if you wanted to load `samtools` you would use
+
+``` bash
+module load samtools
+```
+
+By default the most recent version will be loaded, but if you prefer, you can specify an alternate version as follows:
+
+``` bash
+module load samtools/1.23.1
+```
+
+The following table lists the installed modules and versions as of June 3, 2026. If there is something you would like installed, contact Dr Johnson.
+
+| Application | Versions |
+|-------------|----------|
+| BCFtools    | 1.23.1   |
+| bedtools    | 2.31.1   |
+| FastQC      | 0.12.1   |
+| Python      | 3.14.5   |
+| R           | 4.6.0    |
+| samtools    | 1.23.1   |
