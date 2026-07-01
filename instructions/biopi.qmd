@@ -17,7 +17,7 @@ You can create your key pair in the terminal window with the following:
 ssh-keygen -t ed25519 -C "your_email@hood.edu"
 ```
 
-Save it in the default location (`~/.ssh/`) and pick a passphrase if desired. The passphrase is optional, but it will allow anyone to use the key if they have access to it.
+Save it in the default location (`~/.ssh/`) and pick a passphrase if desired. The passphrase is optional, but it will allow anyone to use the key if they have access to it. If the `.ssh/` directory doesn't already exist in your home directory, you'll need to create it before this will work.
 
 When you have your key, email your public key (i.e. `~/.ssh/id_ed25519.pub`) to Dr Johnson for account setup. You will receive an email confirming your account creation.
 
@@ -89,3 +89,4 @@ The following table lists the installed modules and versions as of June 3, 2026.
 | Python      | 3.14.5   |
 | R           | 4.6.0    |
 | samtools    | 1.23.1   |
+| snakemake   | 9.22.0   |
