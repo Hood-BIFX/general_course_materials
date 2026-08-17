@@ -22,6 +22,9 @@ STUDENT_USERNAMES = [
     'student2_gh'
 ]
 
+# Permission level to grant (i.e. read, triage, write, maintain, admin)
+PERMISSIONS = 'admin'
+
 def create_student_repos(students):
     for student in students:
         new_repo_name = f"{TEMPLATE_REPO}-{student}"
@@ -51,7 +54,7 @@ def create_student_repos(students):
         print(f"  Adding {student} to {new_repo_name}...")
         collab_url = f"https://api.github.com/repos/{ORG_NAME}/{new_repo_name}/collaborators/{student}"
         collab_payload = {
-            "permission": "admin"
+            "permission": PERMISSIONS
         }
         
         collab_response = requests.put(collab_url, headers=HEADERS, json=collab_payload)
