@@ -1,11 +1,11 @@
 ---
 title: "Required software"
-date: January 5, 2026
+date: August 17, 2026
 ---
 
-You will need the following installed prior to our first class. This may take some time, so don't wait until the last minute. If you run into any difficulties, let me know.
+You will want the following installed for this class. This may take some time. If you run into any difficulties, let me know.
 
-Most of these programs will be installed on the computers in HT 316 and HT 315. Those computers are available to use during class or whenever there is not another class using the room.
+Most of these programs will be installed on the computers in HT 315. Those computers are available to use during class or whenever there is not another class using the room.
 
 ## Quarto 
 
@@ -21,7 +21,7 @@ Additional information and instructions for installing tinytex are available [he
 
 ## R
 
-Install the latest version of [R](https://cran.r-project.org/mirrors.html) on your computer. I also recommend, the following packages (if you are unfamiliar with installation of R packages, we will cover this in class):
+Install the latest version of [R](https://cran.r-project.org/mirrors.html) on your computer. I also recommend, the following packages (if you are unfamiliar with installation of R packages, we can cover this in class):
 
 * `tidyverse`
 * `rmarkdown`
@@ -34,7 +34,7 @@ Install the latest version of [Python](https://www.python.org/downloads/) on you
 
 ## Positron
 
-You are likely familiar with RStudio. We will be using a different integrated development environment (IDE) called [Positron](https://positron.posit.co/download.html) in this class. It was developed by the same people as RStudio and is meant to replace RStudio at some point. See ... for more details and information on Positron.
+You are likely familiar with RStudio. We will be using a different integrated development environment (IDE) called [Positron](https://positron.posit.co/download.html) in this class. It is built on top of visual studio and is developed by the same people as RStudio. It is more standard for computer science workflows and is meant to replace RStudio.
 
 ## GitHub Desktop
 
@@ -46,7 +46,7 @@ If you are working on a Windows computer, you will likely need [Git for Windows]
 
 ## Gemini CLI or GitHub Copilot CLI
 
-You'll need either the Gemini CLI or the GitHub Copilot CLI. You may find it useful to install both. The Gemini CLI has a generous free tier that will be sufficient for this class, and you qualify for a free GitHub Copilot Pro plan as a student. There is a little additional set up for GitHub Copilot, but the Pro plan will give you access to the best models from Anthropic, Google, OpenAI and some others.
+You'll probably want either the Gemini CLI or the GitHub Copilot CLI. You may find it useful to install both. The Gemini CLI has a generous free tier that will be sufficient for this class, and you qualify for a free GitHub Copilot Pro plan as a student (although it has become less useful in recent months). There is a little additional set up for GitHub Copilot, but the Pro plan will give you access to models from Anthropic, Google, OpenAI and many others.
 
 ### nvm
 

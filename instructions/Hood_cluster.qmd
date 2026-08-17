@@ -16,15 +16,10 @@ Hood college has a slurm cluster available for student learning and projects.
 
 
 :::{.callout-tip}
-## ssh Password
+### ssh Password
 
 When entering your password when logging into a remote server using `ssh`, no characters will show up as you type. It is paying attention and does capture what you type, even if you don't see any visual feedback.
 :::
-
-* Termius app
-  * The Termius app is great for connecting from mobile devices, although unless you have a keyboard, it can be annoying as the command line requires significant typing.
-  * You qualify for a free license when you sign up for the [GitHub Student Developer Pack](https://education.github.com/pack)!
-    * To sign up you'll need access to your Hood email and student ID - let me know if you don't have an ID.
 
 ### Starting an interactive job
 
