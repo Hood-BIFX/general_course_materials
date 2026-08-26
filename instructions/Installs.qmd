@@ -44,9 +44,9 @@ I recommend installing [GitHub Desktop](https://desktop.github.com/download/) fo
 
 If you are working on a Windows computer, you will likely need [Git for Windows](https://git-scm.com/install/windows) at some point during the semester. Git is installed on Mac and Linux computers by default.
 
-## Gemini CLI or GitHub Copilot CLI
+## Gemini Antigravity or GitHub Copilot CLI
 
-You'll probably want either the Gemini CLI or the GitHub Copilot CLI. You may find it useful to install both. The Gemini CLI has a generous free tier that will be sufficient for this class, and you qualify for a free GitHub Copilot Pro plan as a student (although it has become less useful in recent months). There is a little additional set up for GitHub Copilot, but the Pro plan will give you access to models from Anthropic, Google, OpenAI and many others.
+You'll probably want either Antigravity or the GitHub Copilot CLI. You may find it useful to install both. Antigravity has a generous free tier that will be sufficient for this class, and you qualify for a free GitHub Copilot Pro plan as a student (although it has become less useful in recent months). There is a little additional set up for GitHub Copilot, but the Pro plan will give you access to models from Anthropic, Google, OpenAI and many others.
 
 ### nvm
 
@@ -90,17 +90,14 @@ When `nvm` finishes installing, run the following command in your terminal windo
 nvm install node
 ```
 
-### Gemini CLI
+### Google Antigravity
 
-Once you have Node.js/npm installed (must be version 20 or higher for the Gemini CLI), install the command line interface with the following command (see the [README](https://github.com/google-gemini/gemini-cli) for more details):
+Once you have Node.js/npm installed (must be version 20 or higher last I checked), you have a few options for Antigravity. There is a [desktop app](https://antigravity.google/download) that is easy to install, but it won't work in Positron. For Positron, you'll need to install the Visual Studio Code extension.
 
-```bash
-npm install -g @google/gemini-cli
-```
-
-This should install within a few minutes and will probably give you a bunch of messages. To verify that the Gemini CLI is properly installed, run `gemini` on the command line. Be patient, as it may take several minutes to start up the first time. It will also ask you to authenticate with your Google account.
-
-After authenticating, you should get a command prompt that says `> Type your message or @path/to/file`. You'll type your commands into this box. Use `/quit` to exit from the CLI.
+-   Download the [Visual Studio Code extension](https://marketplace.visualstudio.com/_apis/public/gallery/publishers/Google/vsextensions/google-antigravity/latest/vspackage)
+-   Open your terminal to the folder where it was downloaded
+-   Install it with `positron --install-extension google-antigravity.vsix`
+-   It should show up in your editor sidebar in Positron -> open it and it should finish the install
 
 ### GitHub Copilot CLI
 
