@@ -36,11 +36,17 @@ You'll also need to add/edit your ssh config file so it knows to connect through
 -   Mac/Linux Path: `~/.ssh/config`
 -   Windows Path: `C:\Users\YourUsername\.ssh\config`
 
-Open or create the config file (e.g. with `nano ~/.ssh/config`) and add this routing rule to the end of the file:
+Open or create a config file (e.g. with a plain text editor) and add this routing rule to the end of the file:
 
 ```         
 Host biopi.rho-analytics.com
     ProxyCommand cloudflared access ssh --hostname %h
+```
+
+Once you save the file, open a terminal window in the folder where you saved the config file and move it to `~/.ssh/config` with the `mv` command. So, for example, if it saved as `config.txt` you would use
+
+```bash
+mv config.txt ~/.ssh/config
 ```
 
 ### Logging in
