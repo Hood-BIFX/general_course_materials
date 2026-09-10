@@ -27,11 +27,8 @@ quarto preview
 #### render all slides with
 quarto render --profile slides
 
-#### render syllabus to Word with - this may require minor manual edits (e.g. to tables)
+#### render syllabus to Word with - this may require minor manual edits (e.g. to tables and svg graphics)
 quarto render --profile docx
-
-#### Render and post on Blackboard with:
-quarto render --profile blackboard
 
 ## Add office hours under Course Information
 You can [book a virtual or in person office visit](https://hood.campus.eab.com/pal/dkT4mB31MS) with me at your convenience. <update to your own personal scheduling link as needed>
@@ -63,8 +60,63 @@ Use of the Blackboard gradebook is highly recommended. This gives students real-
 Some grade categories that I frequently use include:
 
 * Attendance: Tied to the Blackboard attendance. When a student is marked as "excused" for a class, that week is not included in the calculated grade. It is recommended to give students a makeup assignment in Blackboard for excused absences.
-* Assignments: I typically use these for makup assignments for excused absences. Any ungraded assignment will not be included in the final grade. Thus, these can be assigned to specific students on a case-by-case basis without affecting other student grades.
+* Assignments: I typically use these for in-class exercises
 * Homework
 * Quiz
 * Presentation
 * Exam
+
+## ADA
+
+Main things to *always* include
+
+-   Use headers (i.e. level 2, 3, ... starting with `##`, `###`, etc...)
+-   Use `lang: en` in YAML header
+-   Always use `fig-alt` header for figures
+-   Use descriptive text in links (e.g. `[Download the Analysis Workflow](https://...)` instead of `[click here](https://...)`)
+
+### General YAML headers
+
+-   subtitle: "Additional context"
+-   lang: en
+
+### html format tags
+
+-   toc: true
+-   toc-depth: 3
+-   smooth-scroll: true
+-   html-math-method: mathjax
+-   code-copy: true
+-   df-print: kable
+
+### pdf format tags
+
+-   pdf-standard: ua-2
+-   pdf-engine: lualatex
+
+Validation: Install veraPDF (quarto install verapdf) to have Quarto automatically validate PDF/UA compliance after each render.
+
+### Code chunks and figures
+
+```{r}
+#| label: fig-expression-distribution
+#| fig-cap: "Distribution of gene expression values across treatment groups."
+#| fig-alt: "Boxplot showing median normalized counts of 450 in the control group versus 820 in the treated group with tight interquartile ranges."
+#| echo: false
+
+boxplot(values ~ group, data = df)
+```
+
+```
+![Visible caption](path/to/image.png){fig-alt="Descriptive alternative text for screen readers"}
+```
+
+### Tables
+
+```
+| Sample ID | Condition | Batch |
+|:----------|:----------|:------|
+| S01       | Control   | 1     |
+| S02       | Treated   | 1     |
+: Table caption {#tbl-samples}
+```
