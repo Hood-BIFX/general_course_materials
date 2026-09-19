@@ -85,14 +85,47 @@ By default the most recent version will be loaded, but if you prefer, you can sp
 module load samtools/1.23.1
 ```
 
-The following table lists the installed modules and versions as of June 3, 2026. If there is something you would like installed, contact Dr Johnson.
+The following table lists the installed modules and versions as of Sep 19, 2026.
 
 | Application | Versions |
 |-------------|----------|
 | BCFtools    | 1.23.1   |
 | bedtools    | 2.31.1   |
+| cellranger  | 10.1.0   |
+| fastp       | 1.3.6    |
 | FastQC      | 0.12.1   |
+| kallisto    | 0.50.0   |
+| multiqc     | 1.35     |
 | Python      | 3.14.5   |
-| R           | 4.6.0    |
+| R           | 4.6.0, 4.6.1 |
+| salmon      | 2.5.1, 2.7.0 |
 | samtools    | 1.23.1   |
 | snakemake   | 9.22.0   |
+| sratools    | 3.4.1    |
+
+### Somthing missing?
+
+If you need additional dependencies, you can either create a Docker container and run it with `apptainer` or contact Dr Johnson.
+
+To start up my Bioconductor Docker container for RNA-seq analysis, for example, you would need to first register the container with
+
+```bash
+apptainer pull rna-seq.sif docker://johnsonra/bioc-rna:r4.6.1
+```
+
+Once the sif file is created, you could start up an R session inside of the container with
+
+```bash
+apptainer exec rna-seq.sif R
+```
+
+## Logging in with Positron
+
+You can log into Biopi in any terminal window, but Positron has a feature that allows you to edit remote files and run that code remotely at the same time. To connect your Positron session to Biopi:
+
+-   Open the Poistron command prompt with `ctrl-shift-P` (Windows) or `command-shift-P` (Mac)
+-   Enter "Remote SSH: Connect to host..."
+-   If you have set up your connection as described above, you should have a `biopi.rho-analytics.com` option that you can click on. If not, click "+ Add host to SSH config file..." or enter "biopi.rho-analytics.com" in the empty field
+-   Follow the prompts for logging in and select a folder to open
+
+At this point, you are editing files directly on the server, and your console (i.e. running R/Python) will also be connected to and running on the server.
