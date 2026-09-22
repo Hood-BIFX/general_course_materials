@@ -95,3 +95,14 @@ You'll find that different remote connections will sometimes require different P
             "overrideName": true
 		}
 ```
+
+### Extra characters on paste into terminal
+
+On my Windows computer, Positron really wants to add extra characters when I try to paste with `ctrl-v`. If this is causing problems (like when you are trying to paste a GitHub command line token) you have two options (replace `ctrl` with `cmd` on a Mac):
+
+-   Use `ctrl-shift-v`: this skips the extra characters
+-   Update the keybindings in Positron:
+    -   Open `File > Preferences > Keyboard Shortcuts`
+    -   Search for "ctrl+v"
+    -   Remove the `Terminal: Paste into Active Terminal` entry
+    -   Search for "ctrl+shift+v" and edit the `Terminal: Paste into Active Terminal` to use `ctrl-v`
