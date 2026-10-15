@@ -1,6 +1,7 @@
 ---
 title: "Intro to Git"
-date: January 5, 2026
+date: October 15, 2026
+bibliography: ../BIFXgeneral.bib
 margin-footer: "[Slides](/standalone/general_course_materials/instructions/01a_git.html)"
 title-slide-attributes:
   data-background-image: /CourseInfo/general_course_materials/assets/01a_git_title.png
@@ -198,6 +199,157 @@ In this case, we are collaborating with ourselves, but collaboration between two
 ![A git tree illustrating collaboration between several individuals and locations.](/general_course_materials/assets/intro_git_tree/intro_git_tree_Page_26.png)
 :::
 
+## Branching Strategies
+
+* Why use branches? To enable parallel development by isolating the main codebase from
+  * New features
+  * Bug fixes
+  * Experiments
+
+A number branching strategies have been proposed, each with different use cases [@haddad_what_2022].
+
+
+### GitFlow
+
+GitFlow is a heavy, structured branching strategy proposed by @driessen_successful_2010 that has received a lot of attention over the years.
+
+:::{.content-visible when-profile="slides"}
+## GitFlow
+:::
+
+* Main branches:
+  * `master` or `main`: Stable, production-ready code
+  * `dev` or `develop`: Latest integrated code for the next release
+
+* Supporting branches:
+  * `feature/*`: New features development
+  * `release/*`: New production release preparation
+  * `hotfix/*`: Quick patches to production issues
+
+:::{.content-visible when-profile="slides"}
+## GitFlow
+:::
+
+* Pros:
+  * Allows for parallel development on a large scale
+  * Excellent for managing multiple versions of a product.
+
+* Cons:
+  * Can be overly complex and cumbersome for simple projects.
+  * Slows down the CI/CD process.
+
+:::{.content-visible when-profile="slides"}
+## GitFlow
+:::
+
+![GitFlow diagram](https://nvie.com/img/git-model@2x.png)
+
+
+### GitHub Flow
+
+GitHub Flow is a simpler, continuous-delivery-focused strategy [@noauthor_github_nodate], where the `main` branch is always in a deployable state.
+
+:::{.content-visible when-profile="slides"}
+## GitHub Flow
+:::
+
+* Workflow:
+  1.  Create a descriptive `feature` branch from `main`.
+  2.  Commit changes to the `feature` branch.
+  3.  Open a Pull Request (PR) to discuss and review changes.
+  4.  Merge the `feature` branch into `main`.
+  5.  Deploy to production.
+
+:::{.content-visible when-profile="slides"}
+## GitHub Flow
+:::
+
+* Pros:
+  * Simple, easy to understand, and fast.
+  * Ideal for teams with continuous integration and deployment.
+
+* Cons:
+  * Not suitable for managing multiple versions or environments.
+  * Requires a high level of testing and discipline to keep `main` stable.
+
+:::{.content-visible when-profile="slides"}
+## GitHub Flow
+:::
+
+![GitHub Flow diagram](https://www.abtasty.com/wp-content/uploads/github-flow-branching-model.jpeg)
+
+### GitLab Flow
+
+GitLab Flow is a hybrid strategy that combines elements of GitFlow and GitHub Flow [@noauthor_what_nodate].
+
+* Key Feature: Uses environment branches (e.g., `production`, `staging`) in addition to the `main` branch.
+
+:::{.content-visible when-profile="slides"}
+## GitLab Flow
+:::
+
+* Workflow:
+  1.  Start a `feature` branch from `main`.
+  2.  Open a Merge Request (MR) to merge into `main`.
+  3.  `main` branch is automatically deployed to a testing environment.
+  4.  Merge `main` into a `staging` branch, which is deployed to the staging environment.
+  5.  Merge `staging` into a `production` branch, which is deployed to the production environment.
+
+:::{.content-visible when-profile="slides"}
+## GitLab Flow
+:::
+
+* Pros:
+  * Provides more structure and isolation than GitHub Flow.
+  * Works well for projects with multiple deployment environments.
+
+* Cons:
+  * Doesn't include extra branches for management of multiple versions
+  * Parallel development for large projects may be challenging
+
+:::{.content-visible when-profile="slides"}
+## GitLab Flow
+:::
+
+![GitLab Flow diagram](https://res.cloudinary.com/dpdm96hjl/image/upload/f_auto,q_auto/v1670587534/khuibeom.com/docs/gitflow.png)
+
+### Trunk-Based Development
+
+Trunk-based development is a strategy where developers merge small, frequent changes directly into a single, shared "trunk" or `main` branch.
+
+:::{.content-visible when-profile="slides"}
+## Trunk-Based Development
+:::
+
+* Core principle: All developers work on the same branch.
+
+* Key practices:
+  * Commit small, isolated changes multiple times a day.
+  * Use feature flags to hide incomplete work from users.
+  * The `main` branch is always in a releasable state.
+
+:::{.content-visible when-profile="slides"}
+## Trunk-Based Development
+:::
+
+* Pros:
+  * Enables rapid and continuous integration and delivery.
+  * Minimizes merge conflicts and "merge hell."
+
+* Cons:
+  * Requires a mature, *disciplined* team and strong automated testing.
+  * Can be challenging for new developers.
+
+
+## Choosing a Strategy
+
+* Simplicity vs. Complexity: Choose a strategy that matches your team's size and project's needs.
+
+* Release cycle: A strategy should align with your release cadence (e.g. frequent, continuous, or scheduled).
+
+* Team discipline: The simpler the strategy, the more discipline is required from the team.
+
+
 ## GitHub
 
 <!-- Move to GitHub to discuss these features -->
@@ -260,3 +412,5 @@ In this case, we are collaborating with ourselves, but collaboration between two
 :::
 
 -   What are pull requests and how do they contribute to code review?
+
+## References
