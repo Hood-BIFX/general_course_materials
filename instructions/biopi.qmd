@@ -40,8 +40,12 @@ Open or create a config file (e.g. with a plain text editor) and add this routin
 
 ```         
 Host biopi.rho-analytics.com
+    user <your username>
     ProxyCommand cloudflared access ssh --hostname %h
+    IdentityFile ~/.ssh/id_ed25519
 ```
+
+where `<your username>` is your Hood username. For example, it should be something like `zz99`.
 
 Once you save the file, open a terminal window in the folder where you saved the config file and move it to `~/.ssh/config` with the `mv` command. So, for example, if it saved as `config.txt` you would use
 
