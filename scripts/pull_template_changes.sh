@@ -6,9 +6,9 @@
 # the updates back to the student's repository.
 
 # --- Configuration ---
-TEMPLATE_REPO="https://github.com/BIFX551-26/bifx551-26-classroom-16fb26-rchallenges-Rchallenges.git"
-ORG_NAME="BIFX551-26" # The GitHub organization where student repos are located
-ASSIGNMENT_PREFIX="rchallenges" # The prefix used for student repos
+TEMPLATE_REPO="https://github.com/BIFX552-26/ChIP-seq-pipeline"
+ORG_NAME="BIFX552-26" # The GitHub organization where student repos are located
+ASSIGNMENT_PREFIX="ChIP-seq-pipeline" # The prefix used for student repos
 
 # --- Script Logic ---
 # 1. Get a list of all repositories in the organization that match the assignment prefix
@@ -28,19 +28,24 @@ for repo_name in $repos; do
     
     # Fetch and Merge
     git fetch template
-    # We use --allow-unrelated-histories because templates/copies don't share history
+    
+    # Use --allow-unrelated-histories because templates/copies don't share history
+    # Add -X theirs to automatically resolve any conflicts in favor of the template
     # -m is used to provide a default commit message for the merge
-    if git merge template/main --allow-unrelated-histories -m "Syncing updates from template repository"; then
+    if git merge template/main --allow-unrelated-histories -X theirs -m "Syncing updates from template repository"; then
         # Push the changes back to the student's main branch
         git push origin main
         echo "Successfully updated $repo_name"
+
+        # clean up
+        cd ..
+        rm -rf "temp_$repo_name"
     else
         echo "CONFLICT in $repo_name. Manual resolution required."
-    fi
 
-    # Cleanup: move back out and remove the temp folder
-    cd ..
-    rm -rf "temp_$repo_name"
+        # keep conflicted repos to allow troubleshooting
+        cd ..
+    fi
 done
 
 echo "Done!"
